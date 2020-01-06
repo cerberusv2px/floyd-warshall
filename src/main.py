@@ -13,7 +13,7 @@ def compute(graph):
     return graph
 
 
-def route_path(graph):
+def route_path(graph, outlets):
     i = 0
     loop_counter = 0
     route_list = []
@@ -34,22 +34,31 @@ def route_path(graph):
 
         if min_route_index not in route_index:
             route_index.append(min_route_index)
-            route_list.append("Outlet: %d \t Distance: %f km" % (min_route_index, min_distance))
+            route_list.append("%s \t Distance: %f km" % (outlets[min_route_index].name, min_distance))
 
         i = min_route_index
         loop_counter = loop_counter + 1
 
+    print("%s \t Distance: 0 km" % outlets[0].name)
     for route in route_list:
         print(route)
+
+    for index, value in enumerate(route_index):
+        for outlet in outlets:
+            if value == outlet.id:
+                outlet.sequence = index
+
+    sorted_outlet = sorted(outlets, key=lambda x: x.sequence, reverse=False)
+    return sorted_outlet
 
 
 def main():
     start_time = time.clock()
     outlets = dataloader.generate_outlets()
     graph = dataloader.get_distance_graph(outlets)
-    print(graph)
+    # print(graph)
     new_graph = compute(graph)
-    route_path(new_graph)
+    outlets = route_path(new_graph, outlets)
     print("Total execution time %s seconds" % (time.clock() - start_time))
 
 

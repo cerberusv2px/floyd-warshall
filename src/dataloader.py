@@ -6,12 +6,12 @@ from src.outlet import Outlet
 
 def generate_outlets():
     outlets = [
-        Outlet(1, "Outlet 1", 27.712143, 85.313245),
-        Outlet(2, "Outlet 2", 27.712162, 85.312908),
-        Outlet(3, "Outlet 3", 27.714843, 85.312044),
-        Outlet(4, "Outlet 4", 27.680820, 85.317000),
-        Outlet(5, "Outlet 5", 27.686906, 85.317343),
-        Outlet(6, "Outlet 6", 27.712020, 85.312950),
+        Outlet(0, "Outlet 1", 27.712143, 85.313245),
+        Outlet(1, "Outlet 2", 27.712162, 85.312908),
+        Outlet(2, "Outlet 3", 27.714843, 85.312044),
+        Outlet(3, "Outlet 4", 27.680820, 85.317000),
+        Outlet(4, "Outlet 5", 27.686906, 85.317343),
+        Outlet(5, "Outlet 6", 27.712020, 85.312950),
     ]
     return outlets
 
@@ -34,5 +34,5 @@ def get_distance_graph(outlets):
             else:
                 distance_graph[i][j] = get_distance(outlet.latitude, outlet.longitude, reference_outlet.latitude,
                                                     reference_outlet.longitude)
-    print(distance_graph)
+    # print(distance_graph)
     return distance_graph
