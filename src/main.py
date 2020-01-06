@@ -1,12 +1,6 @@
 import time
 
-import numpy as np
-
-
-def get_random_data(size):
-    random_data = np.random.uniform(0, 10, [size, size])
-    np.fill_diagonal(random_data, 0)
-    return random_data
+import src.dataloader as dataloader
 
 
 def compute(graph):
@@ -40,7 +34,7 @@ def route_path(graph):
 
         if min_route_index not in route_index:
             route_index.append(min_route_index)
-            route_list.append("Route: %d \t Distance: %f" % (min_route_index, min_distance))
+            route_list.append("Outlet: %d \t Distance: %f km" % (min_route_index, min_distance))
 
         i = min_route_index
         loop_counter = loop_counter + 1
@@ -51,7 +45,8 @@ def route_path(graph):
 
 def main():
     start_time = time.clock()
-    graph = get_random_data(100)
+    outlets = dataloader.generate_outlets()
+    graph = dataloader.get_distance_graph(outlets)
     print(graph)
     new_graph = compute(graph)
     route_path(new_graph)
